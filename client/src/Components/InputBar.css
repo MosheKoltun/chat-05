@@ -1,0 +1,12 @@
+.inputBar {
+    padding: 0.5rem;
+    height: auto;
+    background-color: khaki;
+}
+
+.input {
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px;
+    width: 100%;
+}

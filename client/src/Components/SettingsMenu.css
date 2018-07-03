@@ -1,0 +1,23 @@
+.settingsMenu {
+    background-color: papayawhip;
+    width: 130px;
+}
+/* Full-width input fields */
+.settingsMenu input {
+    margin: 5px;
+    width: 120px;;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.groupsManagement > button {
+    background-color: greenyellow;
+}
+.usersManagement > button {
+    background-color: darkorange;
+}
+
+.settingsMenu button {
+    margin: 5px;
+    width: 120px;
+}
