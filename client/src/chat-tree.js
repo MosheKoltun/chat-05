@@ -113,7 +113,12 @@ function ChatTree(element) {
     // addListItem
     //=========================================================
     function addListItem(indentation, currentArrayMember, previousListItem) {
+        //handle groups
         let name = currentArrayMember["name"];
+        //handle users
+        if (typeof(name) === "undefined" ) {
+            name = currentArrayMember["username"];
+        }
 
         //create list item
         let newListItem = document.createElement("LI");

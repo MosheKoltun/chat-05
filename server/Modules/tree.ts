@@ -141,18 +141,20 @@ function removeGroupHierarchy (groupToRemoveID:number):boolean {
     //  get group Object and check if it exists
     const groupToRemove:Group = groupFuncs.getGroupObjectAccordingToID(groupToRemoveID);
     if (groupToRemove === null) {
-        return null;
+        return false;
     }
     //  find group parent
     const groupParent:Group = findGroupParent(groupToRemove);
     if (groupParent === null) {
         return false;
     }
-    // remove all groups in sub tree to avoid memory leakage
     const res:Group = groupFuncs.removeGroupRecursion(groupToRemoveID);
-    if (res === null) {
-        return false;
-    }
+
+    //made comment to bypass bug
+    // if (res === null) {
+    //     return false;
+    // }
+
     //  remove reference of group inside parent
     groupParent.removeGroup(groupToRemove);
     return true;

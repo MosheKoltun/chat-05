@@ -50,32 +50,40 @@ server.post('/tree-operations/show_tree', (req, res) => {
 });
 //---------------------------------------------------------------------------
 server.post('/tree-operations/create-group', (req, res) => {
-    //if 'General' group does not exist
     let parentGroupID = req.body.parentGroupID;
     if (req.body.childGroupName === ""){
-        res.sendStatus(500).send("error");
-        // res.status(200).send([])
+        res.status(500).send("error");
         return;
     }
     const newGroup = groupFuncs.createNewGroup(req.body.childGroupName);
-    console.log("parentGroupID = " + parentGroupID);
     treeFuncs.addGroupToGroup(parentGroupID, newGroup.getID());
     res.status(200).send(treeFuncs.getTreeJSON());
 });
 //---------------------------------------------------------------------------
 server.post('/tree-operations/remove-group', (req, res) => {
+    let parentGroupID = req.body.parentGroupID;
+    treeFuncs.removeGroupHierarchy(parentGroupID);
+    res.status(200).send(treeFuncs.getTreeJSON());
+});
+//---------------------------------------------------------------------------
+server.post('/tree-operations/add-user', (req, res) => {
+    const parentGroupID = req.body.parentGroupID;
+    const childUserName =  req.body.childUserName;
+
+    if (req.body.childUserName === ""){
+        res.status(500).send("error");
+        return;
+    }
+    const newUser = userFuncs.createNewUser(childUserName,"",0);
+    treeFuncs.addUserToGroup(parentGroupID, newUser.getID());
+    res.status(200).send(treeFuncs.getTreeJSON());
 });
 
-server.post('/tree-operations/join-group', (req, res) => {
+server.post('/tree-operations/remove-user', (req, res) => {
 });
 
-server.post('/tree-operations/exit-group', (req, res) => {
+server.post('/tree-operations/edit-user', (req, res) => {
 });
 
-server.post('/tree-operations/erase-account', (req, res) => {
-});
-
-server.post('/tree-operations/edit-profile', (req, res) => {
-});
 //---------------------------------------------------------------------------
 server.listen(3001);
